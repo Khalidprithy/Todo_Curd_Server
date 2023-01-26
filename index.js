@@ -50,6 +50,7 @@ async function run() {
             const updatedDoc = {
                 $set: {
                     status: updatedProduct.status,
+                    task: updatedProduct.task,
                 }
             };
             const result = await taskCollection.updateOne(filter, updatedDoc, options);
