@@ -66,9 +66,10 @@ async function run() {
             res.send(result)
         });
 
-        // Delete All Notes
-        app.delete('/notes', async (req, res) => {
-            const result = await notesCollection.deleteMany();
+        // Delete All Deleted Notes
+        app.delete('/empty_trash', async (req, res) => {
+            const filter = { isDeleted: true };
+            const result = await notesCollection.deleteMany(filter);
             res.send(result)
         });
 
