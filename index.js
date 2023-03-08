@@ -73,6 +73,14 @@ async function run() {
             res.send(result)
         });
 
+        // Delete All Deleted Notes
+        app.delete('/delete_all', async (req, res) => {
+            const result = await notesCollection.deleteMany();
+            res.send(result)
+        });
+
+
+
 
         // Task API's
         // GET ALL TASK
@@ -135,7 +143,8 @@ async function run() {
 run().catch(console.dir)
 
 app.get('/', (req, res) => {
-    res.send('Hello ToDo App')
+    var html = '<html><body><h1>Welcome to Notes Todo Server</h1></body></html>';
+    res.send(html);
 })
 
 app.listen(port, () => {
