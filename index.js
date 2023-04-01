@@ -20,7 +20,24 @@ async function run() {
         await client.connect();
         const taskCollection = client.db("todo").collection("tasks");
         const notesCollection = client.db("noteKeeper").collection("notes");
+        const cryptoCollection = client.db("crypto").collection("products");
+
         console.log('MongoDB Connected Yes Yes')
+
+
+
+        app.get('/crypto', async (req, res) => {
+            const crypto = await cryptoCollection.find().toArray();
+            res.send(crypto)
+        });
+
+        app.get('/crypto/:id', async (req, res) => {
+            const id = req.params.id;
+            const query = { _id: ObjectId(id) };
+            const crypto = await cryptoCollection.findOne(query);
+            res.send(crypto);
+        });
+
 
         // Notes API's
         // Get All Note
